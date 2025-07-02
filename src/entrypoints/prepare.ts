@@ -49,8 +49,12 @@ async function run() {
       return;
     }
 
-    // Step 5: Check if actor is human
-    await checkHumanActor(octokit.rest, context);
+    // Step 5: Check if actor is human (skip if using PAT)
+    if (!isUsingPAT) {
+      await checkHumanActor(octokit.rest, context);
+    } else {
+      console.log("Using PAT authentication, skipping human actor check");
+    }
 
     // Step 6: Create initial tracking comment
     const commentId = await createInitialComment(octokit.rest, context);

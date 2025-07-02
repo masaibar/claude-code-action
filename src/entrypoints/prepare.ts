@@ -29,9 +29,11 @@ async function run() {
     const context = parseGitHubContext();
 
     // Step 3: Check write permissions
+    const isUsingPAT = !!process.env.OVERRIDE_GITHUB_TOKEN;
     const hasWritePermissions = await checkWritePermissions(
       octokit.rest,
       context,
+      isUsingPAT,
     );
     if (!hasWritePermissions) {
       throw new Error(

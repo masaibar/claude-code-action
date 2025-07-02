@@ -8,7 +8,9 @@ jobs:
   auto-review:
     permissions:
       contents: read
+      pull-requests: write  # PRへの書き込み権限を追加
       id-token: write
+      issues: write        # イシューへの書き込み権限も追加
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +20,7 @@ jobs:
           fetch-depth: 1
 
       - name: Auto review PR
-        uses: masaibar/claude-code-action@beta  # Fork with OAuth support
+        uses: masaibar/claude-code-action@main
         with:
           # Option 1: Use Anthropic API key (commented out for OAuth)
           # anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}

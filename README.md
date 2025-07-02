@@ -84,7 +84,9 @@ jobs:
           # claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
           # claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Option 3: Use Personal Access Token (PAT) instead of OIDC
+          # github_token: ${{ secrets.CLAUDE_REVIEW_PAT }}
+          
           # Optional: add custom trigger phrase (default: @claude)
           # trigger_phrase: "/claude"
           # Optional: add assignee trigger for issues
@@ -105,7 +107,7 @@ jobs:
 | `claude_expires_at`   | Claude AI OAuth token expiration timestamp (required when use_oauth is true)                                         | No       | -         |
 | `direct_prompt`       | Direct prompt for Claude to execute automatically without needing a trigger (for automated workflows)                | No       | -         |
 | `timeout_minutes`     | Timeout in minutes for execution                                                                                     | No       | `30`      |
-| `github_token`        | GitHub token for Claude to operate with. **Only include this if you're connecting a custom GitHub app of your own!** | No       | -         |
+| `github_token`        | GitHub Personal Access Token (PAT) or custom GitHub App token. Use this to bypass OIDC authentication and use your own token. Requires `repo` and `workflow` permissions. | No       | -         |
 | `model`               | Model to use (provider-specific format required for Bedrock/Vertex)                                                  | No       | -         |
 | `anthropic_model`     | **DEPRECATED**: Use `model` instead. Kept for backward compatibility.                                                | No       | -         |
 | `use_bedrock`         | Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API                                          | No       | `false`   |
@@ -420,6 +422,29 @@ The [Claude Code GitHub app](https://github.com/apps/claude) requires these perm
 - **Pull Requests**: Read and write to create PRs and push changes
 - **Issues**: Read and write to respond to issues
 - **Contents**: Read and write to modify repository files
+
+### Using Personal Access Tokens (PAT)
+
+If you prefer to use a Personal Access Token instead of the OIDC authentication:
+
+1. Create a PAT with the following permissions:
+   - `repo` (full repository access)
+   - `workflow` (for workflow modifications, if needed)
+
+2. Add the PAT to your repository secrets (e.g., `CLAUDE_REVIEW_PAT`)
+
+3. Use it in your workflow:
+   ```yaml
+   - uses: masaibar/claude-code-action@main
+     with:
+       github_token: ${{ secrets.CLAUDE_REVIEW_PAT }}
+       # ... other inputs
+   ```
+
+**Note**: When using a PAT, the action will:
+- Use the PAT owner's permissions for all operations
+- Skip human actor checks (allowing bot-triggered workflows)
+- Authenticate directly without OIDC token exchange
 
 ### Commit Signing
 

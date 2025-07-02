@@ -29,6 +29,9 @@ jobs:
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
           claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           
+          # Option 3: Use Personal Access Token (PAT) instead of OIDC
+          # github_token: ${{ secrets.CLAUDE_REVIEW_PAT }}
+          
           timeout_minutes: "60"
           direct_prompt: |
             Please review this pull request and provide comprehensive feedback.

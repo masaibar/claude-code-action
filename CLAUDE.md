@@ -31,8 +31,8 @@ This is a GitHub Action that enables Claude to interact with GitHub PRs and issu
 
 ### Key Components
 
-- **Trigger System**: Responds to `/claude` comments or issue assignments
-- **Authentication**: OIDC-based token exchange for secure GitHub interactions
+- **Trigger System**: Responds to `@claude` comments or issue assignments
+- **Authentication**: Supports OIDC-based token exchange, Personal Access Tokens (PAT), and OAuth for Claude Max
 - **Cloud Integration**: Supports direct Anthropic API, AWS Bedrock, and Google Vertex AI
 - **GitHub Operations**: Creates branches, posts comments, and manages PRs/issues
 
@@ -54,5 +54,9 @@ src/
 
 - Actions are triggered by `@claude` comments or issue assignment unless a different trigger_phrase is specified
 - The action creates branches for issues and pushes to PR branches directly
-- All actions create OIDC tokens for secure authentication
+- Authentication options:
+  - OIDC tokens for secure authentication (default)
+  - Personal Access Tokens (PAT) - bypasses OIDC and human actor checks
+  - OAuth for Claude Max subscribers
+- When using PAT, the action uses the token owner's permissions and skips human actor validation
 - Progress is tracked through dynamic comment updates with checkboxes

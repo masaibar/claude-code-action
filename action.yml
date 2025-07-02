@@ -42,7 +42,7 @@ inputs:
     description: "Anthropic API key (required for direct API, not needed for Bedrock/Vertex/OAuth)"
     required: false
   github_token:
-    description: "GitHub token with repo and pull request permissions (optional if using GitHub App)"
+    description: "GitHub Personal Access Token (PAT) or custom GitHub App token. Use this to bypass OIDC authentication. Requires 'repo' and 'workflow' permissions"
     required: false
   use_bedrock:
     description: "Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API"

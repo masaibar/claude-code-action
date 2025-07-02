@@ -31,9 +31,6 @@ jobs:
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
           claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           
-          # GitHub Personal Access Token
-          github_token: ${{ secrets.CLAUDE_REVIEW_PAT }}
-          
           direct_prompt: |
             Please review this PR. Look at the changes and provide thoughtful feedback on:
             - Code quality and best practices

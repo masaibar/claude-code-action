@@ -1,5 +1,18 @@
 # Changelog
 
+## Latest Changes
+
+### Added
+- **Personal Access Token (PAT) Support**: Added support for using GitHub Personal Access Tokens as an alternative to OIDC authentication
+  - The `github_token` input now accepts PATs for direct authentication
+  - When using a PAT, the action uses the token owner's permissions instead of the actor's
+  - Human actor checks are automatically skipped when using PAT authentication
+  - Useful for workflows triggered by bots or in environments where OIDC is not available
+
+### Fixed
+- Fixed permission check logic to correctly validate PAT owner's permissions
+- Fixed TypeScript type issues in permission validation module
+
 ## Fork Changes (masaibar/claude-code-action@beta)
 
 This is a fork of the official Claude Code Action that adds OAuth authentication support for Claude Max subscribers.

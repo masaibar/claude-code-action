@@ -515,12 +515,12 @@ ${context.directPrompt ? `   - DIRECT INSTRUCTION: A direct instruction was prov
           ? `
       - Push directly using mcp__github_file_ops__commit_files to the existing branch (works for both new and existing files).
       - Use mcp__github_file_ops__commit_files to commit files atomically in a single commit (supports single or multiple files).
-      - When pushing changes with this tool and TRIGGER_USERNAME is not "Unknown", include a "Co-authored-by: ${context.triggerUsername} <${context.triggerUsername}@users.noreply.github.com>" line in the commit message.`
+      - When committing changes, add "Co-authored-by: Claude <claude[bot]@users.noreply.github.com>" to the commit message.`
           : `
       - You are already on the correct branch (${eventData.claudeBranch || "the PR branch"}). Do not create a new branch.
       - Push changes directly to the current branch using mcp__github_file_ops__commit_files (works for both new and existing files)
       - Use mcp__github_file_ops__commit_files to commit files atomically in a single commit (supports single or multiple files).
-      - When pushing changes and TRIGGER_USERNAME is not "Unknown", include a "Co-authored-by: ${context.triggerUsername} <${context.triggerUsername}@users.noreply.github.com>" line in the commit message.
+      - When committing changes, add "Co-authored-by: Claude <claude[bot]@users.noreply.github.com>" to the commit message.
       ${
         eventData.claudeBranch
           ? `- Provide a URL to create a PR manually in this format:
